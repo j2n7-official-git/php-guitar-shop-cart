@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #c0c0c0;
+    margin: 0;
+    padding: 1em;
+}
+header, main {
+    width: 90%;
+    max-width: 700px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 0 1.5em;
+}
+header {
+    padding-top: 1em;
+}
+header h1 {
+    font-size: 1.4em;
+    margin: 0;
+    padding-bottom: .4em;
+    border-bottom: 2px solid #000;
+}
+main {
+    padding-bottom: 1em;
+}
+main h1 {
+    font-size: 1.4em;
+    color: #cc8420;            /* màu cam quét từ ảnh */
+    margin: .8em 0 .4em;
+}
+label {
+    display: inline-block;
+    width: 6em;
+    text-align: right;
+    margin: .3em 0;
+}
+a {
+    color: #336;
+    font-weight: bold;
+}
+table {
+    border-collapse: collapse;
+}
+th, td {
+    padding: .3em .8em;
+}
+.left  { text-align: left; }
+.right { text-align: right; }
+#card_header th {              /* đúng id trong cart_view.php */
+    border-bottom: 2px solid #000;
+}
+#cart_footer td {
+    border-top: 2px solid #000;
+    text-align: right;
+}
+.cart_qty {
+    width: 2.5em;
+    text-align: right;
+}
