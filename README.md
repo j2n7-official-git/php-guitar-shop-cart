@@ -17,7 +17,7 @@ Cùng một dự án Guitar Shop với bản chapter 2.7, được cập nhật 
 <img width="1032" height="718" alt="image" src="https://github.com/user-attachments/assets/1302cf56-95fb-4eef-a567-e602990de4c3" />
 
 ----------------
-**[Changelog: Version exercise 2.7]**
+**[Changelog: Version exercise 2.7]**:
 **index.php** – File điều khiển chính, mọi yêu cầu từ trình duyệt đều đi qua đây. File khởi tạo phiên làm việc (session) với cookie lưu hai tuần, tạo mảng giỏ hàng nếu chưa có và khai báo danh sách sản phẩm gồm Flute, Trumpet và Clarinet kèm giá. Sau đó file đọc tham số action từ biểu mẫu hoặc đường dẫn để quyết định việc cần làm: thêm sản phẩm, cập nhật số lượng, xem giỏ hàng, mở trang thêm sản phẩm hoặc làm trống giỏ. Sau cùng nó nạp giao diện phù hợp. Đây là điểm vào của web.
 
 **cart.php** – File này chứa các hàm xử lý giỏ hàng và được index.php nạp vào bằng require_once. Hàm add_item thêm sản phẩm mới vào session, tính thành tiền bằng giá nhân số lượng; nếu sản phẩm đã có sẵn thì cộng dồn số lượng cũ với số lượng mới. Hàm update_item đổi số lượng của một sản phẩm, tính lại thành tiền, và xóa hẳn sản phẩm khỏi giỏ khi số lượng bằng 0 hoặc nhỏ hơn. Hàm get_subtotal cộng thành tiền của mọi sản phẩm rồi định dạng hai chữ số thập phân.
