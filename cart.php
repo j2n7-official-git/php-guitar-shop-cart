@@ -1,12 +1,13 @@
 <?php
+namespace cart{
 // Add an item to the cart
 function add_item($key, $quantity) {
     global $products;
     if ($quantity < 1) return;
 
     // If item already exists in cart, update quantity
-    if (isset($_SESSION['cart12'][$key])) {
-        $quantity += $_SESSION['cart12'][$key]['qty'];
+    if (isset($_SESSION['cart13'][$key])) {
+        $quantity += $_SESSION['cart13'][$key]['qty'];
         update_item($key, $quantity);
         return;
     }
@@ -20,19 +21,19 @@ function add_item($key, $quantity) {
         'qty' => $quantity,
         'total' => $total
     );
-    $_SESSION['cart12'][$key] = $item;
+    $_SESSION['cart13'][$key] = $item;
 }
 
 // Update an item in the cart
 function update_item($key, $quantity) {
     $quantity = (int) $quantity;
-    if (isset($_SESSION['cart12'][$key])) {
+    if (isset($_SESSION['cart13'][$key])) {
         if ($quantity <= 0) {
-            unset($_SESSION['cart12'][$key]);
+            unset($_SESSION['cart13'][$key]);
         } else {
-            $_SESSION['cart12'][$key]['qty'] = $quantity;
-            $total = $_SESSION['cart12'][$key]['cost'] * $_SESSION['cart12'][$key]['qty'];
-            $_SESSION['cart12'][$key]['total'] = $total;
+            $_SESSION['cart13'][$key]['qty'] = $quantity;
+            $total = $_SESSION['cart13'][$key]['cost'] * $_SESSION['cart13'][$key]['qty'];
+            $_SESSION['cart13'][$key]['total'] = $total;
         }
     }
 }
@@ -40,10 +41,33 @@ function update_item($key, $quantity) {
 // Get cart subtotal
 function get_subtotal() {
     $subtotal = 0;
-    foreach ($_SESSION ['cart12'] as $item) {
+    foreach ($_SESSION ['cart13'] as $item) {
         $subtotal += $item['total'];
     }
     $subtotal_f = number_format($subtotal, 2);
     return $subtotal_f;
 }
-?>
+
+// Get a function for sorting the cart by key
+function compare_factory($sort_key) {
+    return function($left, $right) use ($sort_key) {
+        if ($left[$sort_key] == $right[$sort_key]) {
+            return 0;
+        } else if ($left[$sort_key] < $right[$sort_key]) {
+            return -1;
+        } else {
+            return 1;
+        }
+    };
+}
+
+// Sort the cart by the specified key
+    function sort($sort_key) {
+        $compare_function = compare_factory($sort_key);
+        uasort($_SESSION['cart13'], $compare_function);
+        // Giải thích:
+        // Hàm uasort() sắp xếp mảng $_SESSION['cart13'] theo thứ tự tăng dần dựa trên giá trị của khóa $sort_key.
+        // Định nghĩa chuẩn về uasort() : được dùng để sắp xếp một mảng bằng một hàm so sánh do bạn tự định nghĩa (user-defined), 
+        // đồng thời giữ nguyên mối quan hệ giữa các key (khóa) và value (giá trị) ban đầu của các phần tử trong mảng.
+    }
+}
